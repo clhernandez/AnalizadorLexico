@@ -1,0 +1,21 @@
+#MENU. 
+#1.-Creación de un nuevo AFND reconocedor de un único símbolo. 
+#2.-Unión de dos AFND. #
+#3.-Concatenación de dos AFND. 
+#4.-Clausura reflexiva y transitiva de un AFND.
+1;
+#Estados ej: n=4 -> q0,q1,q2,q3
+4;
+#Lenguaje (Sigma) ej: 0,1,2,3,4,5,+,-,/.*
+a,b,c;
+#Producciones (Delta) ej: A->1,2,3;B->2;C->3; siendo & no existe movimiento y e movimiento vacio
+#	a	b	c	e
+q0->[q1],[&],[&],[&]
+q1->[q2 q3],[q1],[&],[&]
+q2->[&],[&],[&],[&]
+q3->[&],[&],[q3],[q1]
+;
+#Estado inicial Q(0) ej: 0
+0;
+#Estados Finales F:
+[q2];

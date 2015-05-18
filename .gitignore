@@ -14,3 +14,10 @@ hs_err_pid*
 /bin/
 /.project
 /.classpath
+/target/
+/log4j-application.log
+/log4j-application.log.1
+/log4j-application.log.2
+/log4j-application.log.3
+/log4j-application.log.4
+/.settings/
