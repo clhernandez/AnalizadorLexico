@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
+
 import org.apache.log4j.Logger;
 
 import cl.usach.compiladores.lab1.estructuras.Afnd;
@@ -26,9 +28,14 @@ public class AfndToAfd {
 			logger.debug("produccionesTxt q"+j+": " + produccionesTxt.get(j));
 		}
 		afnd.setProducciones(construirMatrizIncidencia(produccionesTxt, afnd.getLenguaje().size()+1));
-		afnd.setClausuras(construirClausuras(afnd.getProducciones(), afnd.getLenguaje().size()+1));
-
-		construirDelta(afnd.getProducciones(),afnd.getLenguaje(),afnd.getClausuras(), afnd.getEstados());
+		for (int i = 0; i < afnd.getProducciones().size(); i++) {
+			//buscar las clausuras para cada nodo
+			logger.debug("C "+afnd.getEstados().get(i)+"- e:" + buildClosuresRec(afnd.getProducciones(), afnd.getEstados(), afnd.getEstados().get(i), new ArrayList<String>()));
+			
+		}
+		//
+		//afnd.setClausuras(construirClausuras(afnd.getProducciones(), afnd.getLenguaje().size()+1));		
+		//construirDelta(afnd.getProducciones(),afnd.getLenguaje(),afnd.getClausuras(), afnd.getEstados());
 	}
 	
 	private List<List<String>> construirMatrizIncidencia(List<String> produccionesTxt, int cntElemLenguaje){
@@ -45,6 +52,48 @@ public class AfndToAfd {
 		}
 		return matrizIncidencia;
 	}
+	
+	private List<String> buildClosuresRec(List<List<String>> matrizIncidencia, List<String> estados, String nodo, List<String> clausuras){
+//		#	a	b	c	e
+//		q0->[q1],[&],[&],[&]
+//		q1->[q2 q3],[q1],[&],[&]
+//		q2->[&],[&],[&],[&]
+//		q3->[&],[&],[q3],[q1]
+//		estados: [q0, q1, q2, q3]
+//		nodo: q0
+		logger.info("Buscando clausuras para: "+nodo);
+		int indexNodo = estados.indexOf(nodo);
+//		logger.debug("Index de "+nodo+": "+indexNodo);
+		String mVacios = matrizIncidencia.get(indexNodo).get(estados.size()-1);
+		logger.debug("Movimientos vacios desde nodo "+nodo+": "+mVacios);
+		if(mVacios.equals("&")){
+			if(clausuras.contains(nodo)==false){
+				clausuras.add(nodo);
+			}
+			logger.debug("Clausuras: "+clausuras);
+			return clausuras;
+		}else{
+			//contiene uno o mas movimientos vacios
+			clausuras.add(nodo);
+			String[] nodoVacio = mVacios.split(" ");
+			for (int i = 0; i < nodoVacio.length; i++) {
+				logger.debug("Rec>>Buscar clausuras para nodo "+nodoVacio[i]);
+				List<String> tempClosure = buildClosuresRec(matrizIncidencia, estados, nodoVacio[i], clausuras);
+				for (String string : tempClosure) {
+					if(clausuras.contains(string)==false){
+						clausuras.add(string);
+						logger.debug("RE>>Clausuras: "+clausuras);
+					}
+				}
+			}
+			logger.debug("REC<<");
+			
+		}
+		
+		return clausuras;
+	}
+	
+	
 	
 	private List<String> construirClausuras(List<List<String>> matrizIncidencia, int cntElemLenguaje){
 		//encontrar clausuras de todos los elementos
