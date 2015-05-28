@@ -1,5 +1,6 @@
 package cl.usach.compiladores.lab1.estructuras;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Afd {
@@ -8,6 +9,14 @@ public class Afd {
 	private List<List<String>> matrizIncidencia;
 	private String estadoInicial;
 	private List<String> estadosFinales;
+	
+	public Afd(){
+		this.estados = new ArrayList<String>();
+		this.lenguaje = new ArrayList<String>();
+		this.matrizIncidencia = new ArrayList<List<String>>();
+		this.estadosFinales = new ArrayList<String>();
+	}
+	
 	public List<String> getEstados() {
 		return estados;
 	}

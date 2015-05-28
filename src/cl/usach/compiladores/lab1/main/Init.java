@@ -14,7 +14,7 @@ public class Init {
 	public static void main(String[] args) throws IOException {
 		try {
 			//snnipet lectura de archivo: http://goo.gl/03JBkb
-			BufferedReader br = new BufferedReader(new FileReader("C:/Users/clandesta/Documents/workspace/AnalizadorLexico/ej.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("C:/Users/clandesta/Documents/workspace/AnalizadorLexico/ej3.txt"));
 	        String line="init";
 			StringBuilder sb = new StringBuilder();
 //			int cntLine=0;
