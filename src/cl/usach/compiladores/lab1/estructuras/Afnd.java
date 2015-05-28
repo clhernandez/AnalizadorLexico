@@ -5,14 +5,19 @@ import java.util.List;
 
 public class Afnd {
 	
-	private List<String> estados;
 	private List<String> lenguaje;
+	private List<String> estados;
 	private List<List<String>> producciones;
+	private List<List<String>> clausuras;
 	private String estadoInicial;
 	private List<String> estadosFinales;
-	private  List<String> clausuras;
-	
-	
+
+	public List<String> getLenguaje() {
+		return lenguaje;
+	}
+	public void setLenguaje(List<String> lenguaje) {
+		this.lenguaje = lenguaje;
+	}	
 	public List<String> getEstados() {
 		return estados;
 	}
@@ -24,12 +29,6 @@ public class Afnd {
 	}
 	public void setEstados(List<String> estados) {
 		this.estados = estados;
-	}
-	public List<String> getLenguaje() {
-		return lenguaje;
-	}
-	public void setLenguaje(List<String> lenguaje) {
-		this.lenguaje = lenguaje;
 	}
 	public List<List<String>> getProducciones() {
 		return producciones;
@@ -49,10 +48,10 @@ public class Afnd {
 	public void setEstadosFinales(List<String> estadosFinales) {
 		this.estadosFinales = estadosFinales;
 	}
-	public List<String> getClausuras() {
+	public List<List<String>> getClausuras() {
 		return clausuras;
 	}
-	public void setClausuras(List<String> clausuras) {
+	public void setClausuras(List<List<String>> clausuras) {
 		this.clausuras = clausuras;
 	}
 	

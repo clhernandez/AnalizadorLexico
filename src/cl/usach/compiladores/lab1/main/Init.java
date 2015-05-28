@@ -22,15 +22,15 @@ public class Init {
 				line = br.readLine();
 				
 				if(line != null && line.contains("#")==false){
-//					System.out.println(cntLine+": "+line);
+//					logger.debug(cntLine+": "+line);
 					sb.append(line);
 //					cntLine++;
 				}
 			}
-//			System.out.println(sb.toString());
+//			logger.debug(sb.toString());
 			List<String> entrada = Arrays.asList(sb.toString().split(";"));
-//			System.out.println(Arrays.toString(entrada.toArray()));
-//			System.out.println(entrada.get(0));
+//			logger.debug(Arrays.toString(entrada.toArray()));
+//			logger.debug(entrada.get(0));
 			if(entrada.size()>0){
 				
 				switch (entrada.get(0).trim()) {

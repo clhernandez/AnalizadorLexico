@@ -15,7 +15,7 @@ q1->[q2 q3],[q1],[&],[&]
 q2->[&],[&],[&],[&]
 q3->[&],[&],[q3],[q1]
 ;
-#Estado inicial Q(0) ej: 0
-0;
+#Estado inicial ej: q0
+q0;
 #Estados Finales F:
 [q2];
